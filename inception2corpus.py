@@ -6,18 +6,18 @@ import subprocess
 import requests.exceptions
 import time
 
-from lib.prompt_utils import (_report_log,
-                              generate_dialog,
-                              generate_yes_no_dialog,
-                              generate_figlet)
-from lib.preprocessing import batch_retokenization
-from lib.inception_connection import InceptionInteract
-from lib.corpus_statistics import CorpusStatistics
-from lib.serialization import Serialization
-from lib.io_utils import (YamlChecker,
-                          output_creation,
-                          clear_temp_cache)
-from lib.constants import *
+from i2c_lib.prompt_utils import (_report_log,
+                                  generate_dialog,
+                                  generate_yes_no_dialog,
+                                  generate_figlet)
+from i2c_lib.preprocessing import batch_retokenization
+from i2c_lib.inception_connection import InceptionInteract
+from i2c_lib.corpus_statistics import CorpusStatistics
+from i2c_lib.serialization import Serialization
+from i2c_lib.io_utils import (YamlChecker,
+                              output_creation,
+                              clear_temp_cache)
+from i2c_lib.constants import *
 
 def main() -> None:
     """This function start inception2corpus CLI and
