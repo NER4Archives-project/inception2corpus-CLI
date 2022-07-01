@@ -1,0 +1,44 @@
+# Information relating to the connection to Inception
+inception_user:
+  # Inception API endpoint (change here)
+  - inception_host: https://inception.dhlab.epfl.ch/prod
+  # Project name in Inception (change here)
+  - project_name: NER4Archives-template
+  # Username to log in (change here)
+  - username: firstname-lastname
+  # Password to log in (change here)
+  - password: password
+
+# Information relating to corpus
+corpus_metadata:
+  # Corpus name (change here)
+  - name_corpus: NER4Archives
+  # Corpus version (change here)
+  - version: 2.0
+  # Inter-annotator agreement score (0 if unknown)
+  - kappa_iaa: 68.6
+  # Sources from which the corpus is extracted ([] if unknown)
+  - from_corpus: [FRAN_IR_000061,
+                  FRAN_IR_000242,
+                  FRAN_IR_001454,
+                  FRAN_IR_001488,
+                  FRAN_IR_001631,
+                  FRAN_IR_041253,
+                  FRAN_IR_050185,
+                  FRAN_IR_050370,
+                  FRAN_IR_050516,
+                  FRAN_IR_053754,
+                  FRAN_IR_054129,
+                  FRAN_IR_054605,
+                  FRAN_IR_055325,
+                  FRAN_IR_057246,
+                  FRAN_IR_058292,
+                  FRAN_IR_058341,
+                  FRAN_IR_058836]
+
+# Corpus serialization ratio
+corpus_stratification:
+  # Data distribution in 2 sets (default => train:80% / test:20%)
+  - train_test_ratio: [0.8, 0.2]
+  # data distribution in 3 sets (default => train:60% / test:20% / eval:20%)
+  - train_test_val_ratio: [0.6, 0.2, 0.2]
