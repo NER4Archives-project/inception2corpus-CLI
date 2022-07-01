@@ -51,6 +51,7 @@ pip install -r requirements.txt
 ## ⚠️  Configuration before launch the tool
 
 - Do not delete the `temp_files/` folder, leave it
+- Do not delete the `i2c_lib/` folder, leave it
 - Go to the [USER_VAR_ENV.yml](./USER_VAR_ENV.yml) file and fill it with the correct information.
 
 ## ▶️ Usage
