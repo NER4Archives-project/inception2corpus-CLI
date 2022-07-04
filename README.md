@@ -1,11 +1,12 @@
+<img src="./documentation/logo-i2c.png" width=150 align=right>
+
 # inception2corpus-CLI
-
-
-![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.7-%2313aab7) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 A CLI for retrieving a corpus annotated with named entities from INCEpTION instance to an archived and reusable corpus in context of any NER project.
 
 *This tool was created in the context of the NER4Archives project (INRIA/Archives nationales); it is adaptable and reusable for any other project under the terms of the [MIT license](./LICENSE)*.
+
+![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.7-%2313aab7) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 The CLI launches a linear process, called a "pipeline", which executes the components in the following order:
 
