@@ -5,9 +5,9 @@ inception_user:
   # Project name in Inception (change here)
   - project_name: NER4Archives-template
   # Username to log in (change here)
-  - username: firstname-lastname
+  - username: # firstname-lastname
   # Password to log in (change here)
-  - password: password
+  - password: #password
 
 # Information relating to corpus
 corpus_metadata:

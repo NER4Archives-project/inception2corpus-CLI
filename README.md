@@ -5,6 +5,7 @@ A CLI for retrieving a corpus annotated with named entities from INCEpTION insta
 
 *This tool was created in the context of the NER4Archives project (INRIA/Archives nationales); it is adaptable and reusable for any other project under the terms of the [MIT license](./LICENSE)*.
 
+
 ![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.7-%2313aab7) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
@@ -68,18 +69,21 @@ python inception2corpus.py
 ```
 ./output_annotated_corpus folder/
  |
- |- data_split_n2/ : The all_reduced.conll divided into 2 sets (train, test)
- |
- |- data_split_n3/ : The all_reduced.conll divided into 3 sets (train, test, eval)
- |
- |- data_split_n3_idx/ : The all_reduced.conll divided into 3 sets (train, test, eval) with sentences ID
- |
- |- data_split_n2_idx/ : The all_reduced.conll divided into 2 sets (train, test) with sentences ID
- |
- |- XMI_curated/ : Original XMI to import into INCEpTION
+ |- output_annotated_corpus folder.zip/
+ |           |
+ |           |- data_split_n2/ : The all_reduced.conll divided into 2 sets (train, test)
+ |           |
+ |           |- data_split_n3/ : The all_reduced.conll divided into 3 sets (train, test, eval)
+ |           |
+ |           |- data_split_n3_idx/ : The all_reduced.conll divided into 3 sets (train, test, eval) with sentences ID
+ |           |
+ |           |- data_split_n2_idx/ : The all_reduced.conll divided into 2 sets (train, test) with sentences ID
+ |           |
+ |           |- XMI_curated/ : Original XMI to import into INCEpTION
+ |           |
+ |           |- all.conll : All documents in CONLL format
+ |           |- all_reduced.conll : All documents in CONLL format reduced to only annotated sentences
  |
  |- meta_corpus.json : corpus metadata and statistics
- |- all.conll : All documents in CONLL format
- |- all_reduced.conll : All documents in CONLL format reduced to only annotated sentences
 
 ```

@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
+import os
 import sys
 import subprocess
 import requests.exceptions
@@ -81,7 +81,7 @@ def main() -> None:
         # 2) Re-tokenized XMI Curated
         _report_log(message="XMI Re-tokenization in progress... (Please wait, this is a long process)", type_log="V")
         batch_retokenization(dir_in=XMI_CURATED_PATH, dir_out=XMI_CURATED_RETOKENIZED,
-                            f_schema=XMI_CURATED_PATH + '/TypeSystem.xml')
+                             f_schema=XMI_CURATED_PATH + '/TypeSystem.xml')
         _report_log(message="XMI curated files are re-tokenized, "
                             "you can check the log here : ./retokenized_log.log",
                     type_log="S")
@@ -117,6 +117,15 @@ def main() -> None:
                             f"{DATA_SPLIT_N3} | "
                             f"{DATA_SPLIT_N3_IDX}",
                     type_log="S")
+
+        # create an archive .zip for output
+        _report_log(message=f"Create archive of {OUTPUT_CORPUS}...", type_log="I")
+        subprocess.call(f'zip -r {OUTPUT_CORPUS}/output_annotated_corpus {OUTPUT_CORPUS}/* -x {OUTPUT_CORPUS}/meta_corpus.json', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        # remove old files from output_annotated_corpus/
+        subprocess.call(
+            f"find {OUTPUT_CORPUS}/* -not \( -name '*zip' -or -name '*json' \) -delete",
+            shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+
         # clear temp files
         _report_log(message="Clear temporary files in progress...", type_log="I")
         clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
