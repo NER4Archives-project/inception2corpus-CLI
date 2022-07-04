@@ -11,7 +11,10 @@ A CLI for retrieving a corpus annotated with named entities from INCEpTION insta
 
 The CLI launches a linear process, called a "pipeline", which executes the components in the following order:
 
-- Fetch curated documents from INCEpTION instance (XMI);
+- Fetch curated documents from INCEpTION instance (XMI - check state of document in Inception > "Monitoring" window);
+
+![curated-doc](./documentation/curated_doc_inception.png)
+
 - Re-tokenize curated documents;
 - Convert XMI to CONLL files;
 - Merge CONLL files in one;
