@@ -19,7 +19,7 @@ The CLI launches a linear process, called a "pipeline", which executes the compo
 - Convert XMI to CONLL files;
 - Merge CONLL files in one;
 - Provides a report containing statistics and metadata about the corpus;
-- Reduce (get only sentences annotated and reject other) and serialize dataset in 2 (train/test) and 3 sets (train/test/eval) according to a ratio defined by the user
+- Reduce (get only sentences annotated and reject other) and serialize dataset in 2 (train/dev) and 3 sets (train/dev/test) according to a ratio defined by the user
 
 At the end of the execution of the program, an `output_annotated_corpus folder/` is provided in the root tool's folder, for more details see this [section](#Output-folder-description).
 
@@ -61,26 +61,39 @@ pip install -r requirements.txt
 
 ## ▶️ Usage
 
-In terminal, run : 
+**method 1)** In terminal, run: 
 
 ```bash
 python inception2corpus.py
 ```
 
-## 📁 Output folder description
+**method 2)** In terminal, run:
+
+```bash
+chmod +x inception2corpus.py
+```
+
+then 
+
+```bash
+./inception2corpus.py
+```
+
+
+## 📁 Full output folder description
 
 ```
 ./output_annotated_corpus folder/
  |
  |- output_annotated_corpus folder.zip/
  |           |
- |           |- data_split_n2/ : The all_reduced.conll divided into 2 sets (train, test)
+ |           |- data_split_n2/ : The all_reduced.conll divided into 2 sets (train, dev)
  |           |
- |           |- data_split_n3/ : The all_reduced.conll divided into 3 sets (train, test, eval)
+ |           |- data_split_n3/ : The all_reduced.conll divided into 3 sets (train, dev, test)
  |           |
- |           |- data_split_n3_idx/ : The all_reduced.conll divided into 3 sets (train, test, eval) with sentences ID
+ |           |- data_split_n3_idx/ : The all_reduced.conll divided into 3 sets (train, dev, test) with sentences ID
  |           |
- |           |- data_split_n2_idx/ : The all_reduced.conll divided into 2 sets (train, test) with sentences ID
+ |           |- data_split_n2_idx/ : The all_reduced.conll divided into 2 sets (train, dev) with sentences ID
  |           |
  |           |- XMI_curated/ : Original XMI to import into INCEpTION
  |           |

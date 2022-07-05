@@ -7,7 +7,7 @@ inception_user:
   # Username to log in (change here)
   - username: # firstname-lastname
   # Password to log in (change here)
-  - password: #password
+  - password: # password
 
 # Information relating to corpus
 corpus_metadata:
@@ -38,7 +38,7 @@ corpus_metadata:
 
 # Corpus serialization ratio
 corpus_stratification:
-  # Data distribution in 2 sets (default => train:80% / test:20%)
-  - train_test_ratio: [0.8, 0.2]
-  # data distribution in 3 sets (default => train:60% / test:20% / eval:20%)
-  - train_test_val_ratio: [0.6, 0.2, 0.2]
+  # Data distribution in 2 sets (default => train:80% / dev:20%)
+  - train_dev_ratio: [0.8, 0.2]
+  # data distribution in 3 sets (default => train:60% / dev:20% / test:20%)
+  - train_dev_test_ratio: [0.6, 0.2, 0.2]

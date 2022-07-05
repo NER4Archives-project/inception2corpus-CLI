@@ -17,8 +17,8 @@ class Serialization:
         with open(f"{OUTPUT_CORPUS}/all.conll", mode="r", encoding="utf-8") as f:
             self.conll = f.read()
 
-        self.ratio_n2 = metadata['corpus_stratification'][0]['train_test_ratio']
-        self.ratio_n3 = metadata['corpus_stratification'][1]['train_test_val_ratio']
+        self.ratio_n2 = metadata['corpus_stratification'][0]['train_dev_ratio']
+        self.ratio_n3 = metadata['corpus_stratification'][1]['train_dev_test_ratio']
 
         self.conll_to_df = self.conll_to_dataframe()
         self.df_reduced = self.dataframe_reduction()
@@ -32,8 +32,8 @@ class Serialization:
         self.df_reduced_shuffled = self.dataframe_shuffle()
 
         # n2 and n3 without sentence idx
-        self.n2_train, self.n2_test = self.split_train_test()
-        self.n3_train, self.n3_test, self.n3_val = self.split_train_test_validation()
+        self.n2_train, self.n2_dev = self.split_train_test()
+        self.n3_train, self.n3_dev, self.n3_test = self.split_train_test_validation()
 
         def split_to_dir(data, name, path_noidx, path_idx):
             data.to_csv(f"{path_idx}/{name}.conll", sep="\t", index=False, header=False)
@@ -41,10 +41,10 @@ class Serialization:
 
 
         for dataset in [(self.n2_train, 'train', DATA_SPLIT_N2, DATA_SPLIT_N2_IDX),
-                        (self.n2_test, 'test', DATA_SPLIT_N2, DATA_SPLIT_N2_IDX),
+                        (self.n2_dev, 'dev', DATA_SPLIT_N2, DATA_SPLIT_N2_IDX),
                         (self.n3_train, 'train', DATA_SPLIT_N3, DATA_SPLIT_N3_IDX),
+                        (self.n3_dev, 'dev', DATA_SPLIT_N3, DATA_SPLIT_N3_IDX),
                         (self.n3_test, 'test', DATA_SPLIT_N3, DATA_SPLIT_N3_IDX),
-                        (self.n3_val, 'eval', DATA_SPLIT_N3, DATA_SPLIT_N3_IDX),
                         ]:
             split_to_dir(dataset[0], dataset[1], dataset[2], dataset[3])
 
@@ -55,10 +55,10 @@ class Serialization:
         self.total_original = len(self.df_reduced_shuffled)
 
         n2_train_stats = (len(self.n2_train) / self.total_original)
-        n2_test_stats = (len(self.n2_test) / self.total_original)
+        n2_test_stats = (len(self.n2_dev) / self.total_original)
         n3_train_stats = (len(self.n3_train) / self.total_original)
-        n3_test_stats = (len(self.n3_test) / self.total_original)
-        n3_validation_stats = (len(self.n3_val) / self.total_original)
+        n3_test_stats = (len(self.n3_dev) / self.total_original)
+        n3_validation_stats = (len(self.n3_test) / self.total_original)
         self.report = f"""
                     === Statistics sample stratification ===
 
@@ -66,14 +66,14 @@ class Serialization:
                     ---------
 
                     * Train part : {round(n2_train_stats, 3)} % | Total : {len(self.n2_train)} data
-                    * Test part : {round(n2_test_stats, 3)} % | Total : {len(self.n2_test)} data
+                    * Dev part : {round(n2_test_stats, 3)} % | Total : {len(self.n2_dev)} data
 
                     N3 sample
                     ---------
 
                     * Train part : {round(n3_train_stats, 3)} % | Total : {len(self.n3_train)} data
-                    * Test part : {round(n3_test_stats, 3)} % | Total : {len(self.n3_test)} data
-                    * Validation part : {round(n3_validation_stats, 3)} % | Total : {len(self.n3_val)} data
+                    * Dev part : {round(n3_test_stats, 3)} % | Total : {len(self.n3_dev)} data
+                    * Test part : {round(n3_validation_stats, 3)} % | Total : {len(self.n3_test)} data
 
 
             """

@@ -136,7 +136,7 @@ def main() -> None:
         end = time.time() - start
         generate_dialog(msg=ENDPROCESS,
                         type="V")
-        _report_log(message=f"the pipeline took {end} seconds in total. Your corpus is accessible here: {OUTPUT_CORPUS}.\n\nPress ENTER to quit.", type_log="I")
+        _report_log(message=f"The pipeline took {end} seconds in total. Your corpus is accessible here: {OUTPUT_CORPUS}.\n\nPress ENTER to quit.", type_log="I")
 
 
 if __name__ == '__main__':

@@ -40,7 +40,7 @@ The pipeline will execute the components in the following order:
 3) Convert XMIs to CONLLs
 4) Merge CONLLs in one (all.conll)
 5) Compute corpus statistics (metrics.json)
-6) Serialize corpus in (train/test) and (train/test/eval) according to 
+6) Serialize corpus in (train/dev) and (train/dev/test) according to 
 user's split ratio (n2/ and n3/ with sentences id and not)
 7) Export all files in unique folder output_annotated_corpus/
 
