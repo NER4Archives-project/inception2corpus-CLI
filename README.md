@@ -61,22 +61,29 @@ pip install -r requirements.txt
 
 ## ▶️ Usage
 
-**method 1)** In terminal, run: 
+From terminal, activate previous code environment
 
 ```bash
-python inception2corpus.py
+source venv/bin/activate
+```
+and then run tool with :
+
+**method 1)** : 
+
+```bash
+(venv) python inception2corpus.py
 ```
 
-**method 2)** In terminal, run:
+**method 2)** :
 
 ```bash
-chmod +x inception2corpus.py
+(venv) chmod +x inception2corpus.py
 ```
 
 then 
 
 ```bash
-./inception2corpus.py
+(venv) ./inception2corpus.py
 ```
 
 
