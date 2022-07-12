@@ -25,6 +25,8 @@ At the end of the execution of the program, an `output_annotated_corpus folder/`
 
 ## 🛠️ Installation
 
+### MacOSx / Linux
+
 1. In `./inception2corpus-CLI/` location, open a terminal
 
 2. Check if Python 3.7 or higher is installed
@@ -53,6 +55,37 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Windows
+
+1. In `./inception2corpus-CLI/` location, open a terminal (powershell)
+
+2. Check if Python 3.7 or higher is installed
+
+```bash
+python --version
+```
+
+if not, install it [here](https://www.python.org/downloads/)
+
+3. Create a code environment with virtualenv and correct Python version
+
+```bash
+py -m venv venv
+```
+
+4. Activate this code environment
+
+```bash
+.\venv\Scripts\activate
+```
+
+5. Finally, install the required packages
+
+```bash
+pip install -r .\requirements.txt
+```
+
+
 ## ⚠️  Configuration before launch the tool
 
 - Do not delete the `temp_files/` folder, leave it
@@ -60,6 +93,8 @@ pip install -r requirements.txt
 - Go to the [USER_VAR_ENV.yml](./USER_VAR_ENV.yml) file and fill it with the correct information.
 
 ## ▶️ Usage
+
+First activate (Cf. Installation section) code env and then follow:
 
 **method 1)** In terminal, run: 
 

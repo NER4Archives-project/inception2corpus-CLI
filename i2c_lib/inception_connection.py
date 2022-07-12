@@ -25,11 +25,12 @@ from i2c_lib.prompt_utils import (kb,
 
 
 class InceptionInteract:
-    def __init__(self, inception_host, project_name, inception_username, inception_password):
+    def __init__(self, inception_host, project_name, inception_username, inception_password, conll_fmt):
         self.host = inception_host
         self.project_name = project_name.lower()
         self.username = inception_username
         self.password = inception_password
+        self.conll_fmt = conll_fmt
         self.client = Pycaprio(self.host, authentication=(self.username, self.password))
         self.project_id = self._find_projectid_by_name()
 
@@ -87,7 +88,7 @@ class InceptionInteract:
         with patch_stdout():
             with ProgressBar(title=title, key_bindings=kb, bottom_toolbar=bottom_toolbar) as pb:
                 for document in pb(documents_curated):
-                    document_content = self.client.api.document(self.project_id, document, document_format="conll2000")
+                    document_content = self.client.api.document(self.project_id, document, document_format=self.conll_fmt)
                     path_conll = f"{CONLL_CURATED_RETOKENIZED}/{document.document_name[:-4]}.conll"
                     with open(path_conll, 'wb') as document_file:
                         document_file.write(document_content)

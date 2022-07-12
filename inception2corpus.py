@@ -54,7 +54,8 @@ def main() -> None:
             client_inception = InceptionInteract(inception_host=yml_env['inception_user'][0]['inception_host'],
                                                  project_name=yml_env['inception_user'][1]['project_name'],
                                                  inception_username=yml_env['inception_user'][2]['username'],
-                                                 inception_password=yml_env['inception_user'][3]['password'])
+                                                 inception_password=yml_env['inception_user'][3]['password'],
+                                                 conll_fmt=yml_env['inception_user'][4]['format_conll'])
         except requests.exceptions.JSONDecodeError:
             client_inception = None
 
@@ -71,6 +72,8 @@ def main() -> None:
         # Output_annotated_corpus/ creation
         _report_log(message=f"Creating the new folder: {OUTPUT_CORPUS} ...", type_log="V")
         output_creation()
+        clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
+        clear_temp_cache(f'{CONLL_CURATED_RETOKENIZED}/*.conll')
         _report_log(message=f"{OUTPUT_CORPUS} is created.", type_log="S")
 
         # 1) Fetch all curated XMI curated

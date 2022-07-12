@@ -75,7 +75,6 @@ class Serialization:
                     * Dev part : {round(n3_test_stats, 3)} % | Total : {len(self.n3_dev)} data
                     * Test part : {round(n3_validation_stats, 3)} % | Total : {len(self.n3_test)} data
 
-
             """
 
 
