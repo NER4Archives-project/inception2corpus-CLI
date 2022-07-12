@@ -8,7 +8,7 @@ inception_user:
   - username: # change here
   # Password to log in
   - password: # change here
-  # test with "conll2000" (ner4ARchives) or "conll2002" (datacatalogue) depending on Inception version
+  # test with "conll2000" (NER4Archives) or "conll2002" (datacatalogue). Check Inception version.
   - format_conll: conll2000 # change here
 
 # Information relating to corpus
