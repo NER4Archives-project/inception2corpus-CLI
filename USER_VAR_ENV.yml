@@ -1,13 +1,13 @@
 # Information relating to the connection to Inception
 inception_user:
   # Inception API endpoint (if demo instance: http://localhost:8080)
-  - inception_host: # change here
+  - inception_host: https://inception.dhlab.epfl.ch/prod # change here
   # Project name in Inception
-  - project_name: # change here
+  - project_name: NER4Archives-template # change here
   # Username to log in
-  - username: # change here
+  - username:  # change here
   # Password to log in
-  - password: # change here
+  - password:  # change here
   # test with "conll2000" (NER4Archives) or "conll2002" (datacatalogue). Check Inception version.
   - format_conll: conll2000 # change here
 
@@ -16,7 +16,7 @@ corpus_metadata:
   # Corpus name
   - name_corpus: NER4Archives # change here
   # Corpus version
-  - version: 2.0 # change here
+  - version: 3.0 # change here
   # Inter-annotator agreement score (0 if unknown)
   - kappa_iaa: 68.6 # change here
   # Sources from which the corpus is extracted ([] if unknown)

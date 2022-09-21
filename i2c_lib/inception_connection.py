@@ -7,12 +7,12 @@ import io
 import os
 import zipfile
 import glob
-
+import time
 
 from prompt_toolkit.shortcuts import ProgressBar
 from prompt_toolkit.patch_stdout import patch_stdout
 
-from pycaprio import Pycaprio
+from pycaprio import Pycaprio, core
 from pycaprio.mappings import InceptionFormat, DocumentState
 
 from i2c_lib.constants import (XMI_CURATED_PATH,
@@ -31,7 +31,7 @@ class InceptionInteract:
         self.username = inception_username
         self.password = inception_password
         self.conll_fmt = conll_fmt
-        self.client = Pycaprio(self.host, authentication=(self.username, self.password))
+        self.client = Pycaprio(self.host, authentication=(str(self.username), str(self.password)))
         self.project_id = self._find_projectid_by_name()
 
     def _find_projectid_by_name(self):
@@ -88,11 +88,18 @@ class InceptionInteract:
         with patch_stdout():
             with ProgressBar(title=title, key_bindings=kb, bottom_toolbar=bottom_toolbar) as pb:
                 for document in pb(documents_curated):
-                    document_content = self.client.api.document(self.project_id, document, document_format=self.conll_fmt)
+                    document_content = self.client.api.document(self.project_id, document, document_format=InceptionFormat.CONLL2000)
                     path_conll = f"{CONLL_CURATED_RETOKENIZED}/{document.document_name[:-4]}.conll"
                     with open(path_conll, 'wb') as document_file:
                         document_file.write(document_content)
 
         # Remove temporary documents
-        for xmi_id in temp_xmi_id:
-            self.client.api.delete_document(self.project_id, xmi_id)
+        time.sleep(15)
+        print(temp_xmi_id)
+        try:
+            for xmi_id in temp_xmi_id:
+                self.client.api.delete_document(self.project_id, xmi_id)
+                time.sleep(1)
+        except:
+            print("Be careful, new XMI curated retokenized cannot remove via API, "
+                  "please remove these documents manually in instance.")
