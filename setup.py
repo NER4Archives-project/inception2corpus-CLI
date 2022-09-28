@@ -34,6 +34,6 @@ setup(
     ],
     entry_points="""
         [console_scripts]
-        inception2cli=inception2cli:main
+        inception2corpus=inception2corpus:main
     """
 )
