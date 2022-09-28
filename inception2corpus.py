@@ -3,8 +3,9 @@
 import os
 import sys
 import subprocess
+
+import click
 import requests.exceptions
-import time
 
 from i2c_lib.prompt_utils import (_report_log,
                                   generate_dialog,
@@ -19,21 +20,29 @@ from i2c_lib.io_utils import (YamlChecker,
                               clear_temp_cache)
 from i2c_lib.constants import *
 
-def main() -> None:
-    """This function start inception2corpus CLI and
-    execute a linear process.
+import x2c
+
+
+@click.command()
+@click.argument('yaml_env_file',
+                nargs=1)
+@x2c.timing
+def main(yaml_env_file: str) -> None:
+    """INCEPTION2CORPUS PIPELINE CLI - 2022
+
+    YAML_ENV_FILE (str): path to YAML file contains environnement variable
     """
-    start = time.time()
     result = generate_yes_no_dialog(title=TITLE, text=INTRODUCTION)
 
     if result:
-        yaml_object = YamlChecker(path="./USER_VAR_ENV.yml")
+        yaml_object = YamlChecker(path=yaml_env_file)
         yml_env = yaml_object.yml_env
         # Check YAML conformity
         if yml_env is None:
             generate_dialog(msg="❌ It seems the YAML file is not compliant. "
                                 "Check it and restart.\n\nPress ENTER to quit.",
                             type="E")
+            sys.exit()
         # Check YAML values
         if len(yaml_object.bad_properties) > 0:
             to_control = ""
@@ -43,6 +52,7 @@ def main() -> None:
                 msg=f"❌ It seems the YAML file contains errors for the following "
                     f"values:\n\n{to_control}\nCheck it and restart.\n\nPress ENTER to quit.",
                 type="E")
+            sys.exit()
         else:
             generate_dialog(
                 msg="✅ YAML FILE check is valid, "
@@ -67,7 +77,6 @@ def main() -> None:
             sys.exit()
 
         # The pipeline begin here
-        generate_figlet(msg="START PIPELINE!", style="slant", color="green")
 
         # Output_annotated_corpus/ creation
         _report_log(message=f"Creating the new folder: {OUTPUT_CORPUS} ...", type_log="V")
@@ -91,7 +100,13 @@ def main() -> None:
 
         # 3) Convert XMIs to CONLL
         _report_log(message="Convert XMI to CONLL format in progress...", type_log="V")
-        client_inception.xmi_to_conll()
+        x2c.Xmi2Conll(
+            xmi=XMI_CURATED_RETOKENIZED,
+            typesystem_input=f'{XMI_CURATED_PATH}/TypeSystem.xml',
+            output=CONLL_CURATED_RETOKENIZED,
+            type_name_annotations="de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
+            sep="space"
+        )
         _report_log(message="All XMI are converted in CONLL format",
                     type_log="S")
 
@@ -134,12 +149,7 @@ def main() -> None:
         clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
         clear_temp_cache(f'{CONLL_CURATED_RETOKENIZED}/*.conll')
 
-        generate_figlet(msg="PIPELINE DONE!", style="slant", color="green")
-
-        end = time.time() - start
-        generate_dialog(msg=ENDPROCESS,
-                        type="V")
-        _report_log(message=f"The pipeline took {end} seconds in total. Your corpus is accessible here: {OUTPUT_CORPUS}.\n\nPress ENTER to quit.", type_log="I")
+        _report_log(message=f"FINISHED: Your corpus is available here: {OUTPUT_CORPUS}/{OUTPUT_CORPUS}.zip", type_log="I")
 
 
 if __name__ == '__main__':

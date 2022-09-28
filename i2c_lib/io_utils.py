@@ -4,6 +4,7 @@
 
 """
 import glob
+import os
 import subprocess
 
 import yaml
@@ -29,15 +30,25 @@ class YamlChecker:
                     if property_value is None:
                         self.bad_properties.append((k, property_name, property_value))
 
+def create_or_not(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
+
 def output_creation():
     # Try to remove the old dir tree output_annotated_corpus/
     subprocess.call(f'rm -r {OUTPUT_CORPUS}', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     # Create the new dir tree output_annotated_corpus/
-    os.mkdir(OUTPUT_CORPUS)
-    os.mkdir(DATA_SPLIT_N2)
-    os.mkdir(DATA_SPLIT_N3)
-    os.mkdir(DATA_SPLIT_N2_IDX)
-    os.mkdir(DATA_SPLIT_N3_IDX)
+    for path in [
+        OUTPUT_CORPUS,
+        OUTPUT_TEMP_FILES,
+        XMI_CURATED_RETOKENIZED,
+        CONLL_CURATED_RETOKENIZED,
+        DATA_SPLIT_N2,
+        DATA_SPLIT_N3,
+        DATA_SPLIT_N2_IDX,
+        DATA_SPLIT_N3_IDX
+    ]:
+        create_or_not(path)
 
 
 def clear_temp_cache(path: str):

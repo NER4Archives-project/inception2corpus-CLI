@@ -5,9 +5,9 @@ inception_user:
   # Project name in Inception
   - project_name: NER4Archives-template # change here
   # Username to log in
-  - username:  # change here
+  - username:   # change here
   # Password to log in
-  - password:  # change here
+  - password:   # change here
   # test with "conll2000" (NER4Archives) or "conll2002" (datacatalogue). Check Inception version.
   - format_conll: conll2000 # change here
 
