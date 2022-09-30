@@ -6,16 +6,13 @@
 
 import os
 from pathlib import Path
-
-from concurrent.futures import ThreadPoolExecutor
-
 import logging
 import re
 from unicodedata import category
+from concurrent.futures import ThreadPoolExecutor
 
 from prompt_toolkit.patch_stdout import patch_stdout
 from prompt_toolkit.shortcuts import ProgressBar
-
 from cassis import load_cas_from_xmi, load_typesystem, typesystem, cas
 
 from i2c_lib.prompt_utils import kb, bottom_toolbar, convert_to_html

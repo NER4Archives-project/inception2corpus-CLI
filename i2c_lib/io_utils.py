@@ -4,7 +4,6 @@
 
 """
 import glob
-import os
 import subprocess
 
 import yaml

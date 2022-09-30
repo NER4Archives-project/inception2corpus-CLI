@@ -6,113 +6,85 @@ A CLI for retrieving a corpus annotated with named entities from INCEpTION insta
 *This tool was created in the context of the NER4Archives project (INRIA/Archives nationales); it is adaptable and reusable for any other project under the terms of the [MIT license](./LICENSE)*.
 
 
-![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.7-%2313aab7) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Python Version](https://img.shields.io/badge/Python-%3E%3D%203.7-%2313aab7) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![PyPI version](https://badge.fury.io/py/inception2corpus.svg)](https://badge.fury.io/py/inception2corpus)
 
 
 The CLI launches a linear process, called a "pipeline", which executes the components in the following order:
 
-- Fetch curated documents from INCEpTION instance (XMI - check state of document in Inception > "Monitoring" window);
+- Fetch curated documents (XMI format) from an INCEpTION instance (check state of document in Inception > "Monitoring" window);
 
 ![curated-doc](./documentation/curated_doc_inception.png)
 
-- Re-tokenize curated documents;
-- Convert XMI to CONLL files;
+- preprocessing curated documents (retokenize, remove unprintable characters etc.);
+- Convert XMI to CONLL files (inception2corpus use [xmi2conll cli](https://github.com/Lucaterre/xmi2conll) as a module);
 - Merge CONLL files in one;
 - Provides a report containing statistics and metadata about the corpus;
 - Reduce (get only sentences annotated and reject other) and serialize dataset in 2 (train/dev) and 3 sets (train/dev/test) according to a ratio defined by the user
 
-At the end of the execution of the program, an `output_annotated_corpus folder/` is provided in the root tool's folder, for more details see this [section](#Output-folder-description).
+At the end of the execution of the program, an `output_annotated_corpus folder/` is provided at the root working directory, for more details see this [section](#Output-folder-description).
 
-## 🛠️ Installation
+## 🛠️ Installation (easy way)
 
-### MacOSx / Linux
+1. You need Python 3.7 or higher is installed (if not, install it [here](https://www.python.org/downloads/)).
 
-1. In `./inception2corpus-CLI/` location, open a terminal
+2. First, create a new directory and set a code environment with virtualenv and correct Python version, follow these steps (depending on OS):
 
-2. Check if Python 3.7 or higher is installed
+    ### MacOSx / Linux
+
+    ```bash
+    virtualenv --python=/usr/bin/python3.7 venv
+    ```
+
+    then, activate this new code environment with:
+
+    ```bash
+    source venv/bin/activate
+    ```
+
+    ### Windows
+
+    ```bash
+    py -m venv venv
+    ```
+
+    then, activate this new code environment with:
+
+    ```bash
+    .\venv\Scripts\activate
+    ```
+
+3. Finally, install `inception2corpus` CLI via pip with:
+
+    ```bash
+    pip install inception2corpus
+    ```
+
+## 🛠️ Installation (for developers only)
 
 ```bash
-python --version
-```
-
-if not, install it [here](https://www.python.org/downloads/)
-
-3. Create a code environment with virtualenv and correct Python version
-
-```bash
-virtualenv --python=/usr/bin/python3.7 venv
-```
-
-4. Activate this code environment
-
-```bash
-source venv/bin/activate
-```
-
-5. Finally, install the required packages
-
-```bash
+# 1. clone git repository
+git clone https://github.com/NER4Archives-project/inception2corpus-CLI.git
+# 2. Go to repository and create a new virtual env (follow steps in easy way installation)
+# 3. install packages
+# (on MACOSx/LINUX): 
 pip install -r requirements.txt
-```
-
-### Windows
-
-1. In `./inception2corpus-CLI/` location, open a terminal (powershell)
-
-2. Check if Python 3.7 or higher is installed
-
-```bash
-python --version
-```
-
-if not, install it [here](https://www.python.org/downloads/)
-
-3. Create a code environment with virtualenv and correct Python version
-
-```bash
-py -m venv venv
-```
-
-4. Activate this code environment
-
-```bash
-.\venv\Scripts\activate
-```
-
-5. Finally, install the required packages
-
-```bash
+# (on Windows): 
 pip install -r .\requirements.txt
 ```
 
-
-## ⚠️  Configuration before launch the tool
-
-- Do not delete the `temp_files/` folder, leave it
-- Do not delete the `i2c_lib/` folder, leave it
-- Go to the [USER_VAR_ENV.yml](./USER_VAR_ENV.yml) file and fill it with the correct information.
-
 ## ▶️ Usage
 
-First activate (Cf. Installation section) code env and then follow:
+1. `inception2corpus` CLI use a YAML file as argument to specify INCEpTION HOST information,
+corpus metadata, conll format, serialization options etc.
+You can use and update the template here [USER_VAR_ENV.yml](./USER_VAR_ENV.yml).
 
-**method 1)** In terminal, run: 
-
-```bash
-python inception2corpus.py
-```
-
-**method 2)** In terminal, run:
-
-```bash
-chmod +x inception2corpus.py
-```
-
-then 
-
-```bash
-./inception2corpus.py
-```
+2. When configuration YAML file is completed use this command:
+   ```bash
+   inception2corpus ./USER_VAR_ENV.yml
+   ```
+3. At the end of this process, a new output directory is created at the root of working
+directory (`./output_annotated_corpus folder/`) that contains your final corpus, ready to train.
+Also, a new `temp_files/` folder is created at the root, leave it or delete it as you want.
 
 
 ## 📁 Full output folder description
