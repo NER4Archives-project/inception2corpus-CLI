@@ -5,11 +5,17 @@ inception_user:
   # Project name in Inception
   - project_name: NER4Archives-template # change here
   # Username to log in
-  - username:   # change here
+  - username: inria-user # change here
   # Password to log in
-  - password:   # change here
-  # test with "conll2000" (NER4Archives) or "conll2002" (datacatalogue). Check Inception version.
-  - format_conll: conll2000 # change here
+  - password: x022IcIQJEWY3$sDxun # change here
+
+
+# Information related to output conll
+conll_structure:
+  # Which kind of feature extract in new conll (default Named Entity)
+  - feature_structure: de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity
+  # What kind of separator in output (only two values : "space" or "tab")
+  - type_separator: space
 
 # Information relating to corpus
 corpus_metadata:
@@ -44,3 +50,4 @@ corpus_stratification:
   - train_dev_ratio: [0.8, 0.2]
   # data distribution in 3 sets (default => train:60% / dev:20% / test:20%)
   - train_dev_test_ratio: [0.6, 0.2, 0.2]
+

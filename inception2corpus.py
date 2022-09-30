@@ -64,8 +64,7 @@ def main(yaml_env_file: str) -> None:
             client_inception = InceptionInteract(inception_host=yml_env['inception_user'][0]['inception_host'],
                                                  project_name=yml_env['inception_user'][1]['project_name'],
                                                  inception_username=yml_env['inception_user'][2]['username'],
-                                                 inception_password=yml_env['inception_user'][3]['password'],
-                                                 conll_fmt=yml_env['inception_user'][4]['format_conll'])
+                                                 inception_password=yml_env['inception_user'][3]['password'])
         except requests.exceptions.JSONDecodeError:
             client_inception = None
 
@@ -104,8 +103,8 @@ def main(yaml_env_file: str) -> None:
             xmi=XMI_CURATED_RETOKENIZED,
             typesystem_input=f'{XMI_CURATED_PATH}/TypeSystem.xml',
             output=CONLL_CURATED_RETOKENIZED,
-            type_name_annotations="de.tudarmstadt.ukp.dkpro.core.api.ner.type.NamedEntity",
-            sep="space"
+            type_name_annotations=yml_env['conll_structure'][0]['feature_structure'],
+            sep=yml_env['conll_structure'][1]['type_separator']
         )
         _report_log(message="All XMI are converted in CONLL format",
                     type_log="S")
@@ -149,7 +148,7 @@ def main(yaml_env_file: str) -> None:
         clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
         clear_temp_cache(f'{CONLL_CURATED_RETOKENIZED}/*.conll')
 
-        _report_log(message=f"FINISHED: Your corpus is available here: {OUTPUT_CORPUS}/{OUTPUT_CORPUS}.zip", type_log="I")
+        _report_log(message=f"FINISHED: corpus is available here: {OUTPUT_CORPUS}/{OUTPUT_CORPUS}.zip", type_log="I")
 
 
 if __name__ == '__main__':

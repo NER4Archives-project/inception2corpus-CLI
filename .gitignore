@@ -131,4 +131,8 @@ dmypy.json
 # IDE
 .idea
 
+# specific project dir/files
+output_annotated_corpus/
 temp_files/
+datatest/
+optimize_test.py
