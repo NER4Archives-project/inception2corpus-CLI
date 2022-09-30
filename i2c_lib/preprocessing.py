@@ -61,7 +61,7 @@ class Retokenizer:
             if split_apostrophes:
                 new_tok = self.split_off_apostrophes(tok_text, tok)
                 if new_tok is not None:
-                    tokens += self.split_off_apostrophes(tok_text, tok)
+                    tokens += new_tok
 
         # add new retok tokens
         if len(tokens) > 0:
