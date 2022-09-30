@@ -5,10 +5,9 @@ inception_user:
   # Project name in Inception
   - project_name: NER4Archives-template # change here
   # Username to log in
-  - username: # change here
+  - username: inria-user # change here
   # Password to log in
-  - password: # change here
-
+  - password: x022IcIQJEWY3$sDxun # change here
 
 # Information related to output conll
 conll_structure:
