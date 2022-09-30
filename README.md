@@ -25,9 +25,9 @@ At the end of the execution of the program, an `output_annotated_corpus folder/`
 
 ## 🛠️ Installation (easy way)
 
-1. You need Python 3.7 or higher is installed (if not, install it [here](https://www.python.org/downloads/)).
+1. You need Python 3.7 or higher installed (if not, install it [here](https://www.python.org/downloads/)).
 
-2. First, create a new directory and set a code environment with virtualenv and correct Python version, follow these steps (depending on OS):
+2. First, create a new directory and set up a code environment with virtualenv and correct Python version, follow these steps (depending on your OS):
 
     ### MacOSx / Linux
 
