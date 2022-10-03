@@ -2,7 +2,7 @@ dkpro-cassis==0.7.2
 pycaprio==0.2.0
 click==8.1.3
 requests==2.28.1
-xmi2conll==0.1.2
+xmi2conll==0.1.6
 prompt-toolkit==3.0.30
 nltk==3.7
 PyYAML==6.0

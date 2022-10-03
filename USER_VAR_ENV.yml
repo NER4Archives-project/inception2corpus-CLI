@@ -7,7 +7,7 @@ inception_user:
   # Username to log in
   - username:  # change here
   # Password to log in
-  - password:  # change here
+  - password:   # change here
 
 # Information related to output conll
 conll_structure:

@@ -61,7 +61,7 @@ class CorpusStatistics:
                     mention_tagged = mention
                     tokens_tagged.append(mention_tagged)
 
-        conlltags = [(token, "_", tg) for token, tg in zip(tokens, tags)]
+        conlltags = [(token, "_", tg) if tg != '' else (token, '_', 'O') for token, tg in zip(tokens, tags)]
         ne_tree = conlltags2tree(conlltags)
         original_text = []
         for subtree in ne_tree:
