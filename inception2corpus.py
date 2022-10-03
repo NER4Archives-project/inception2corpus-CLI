@@ -79,42 +79,39 @@ def main(yaml_env_file: str) -> None:
 
         # Output_annotated_corpus/ creation
         _report_log(message=f"Creating the new folder: {OUTPUT_CORPUS} ...", type_log="V")
-        """
         output_creation()
         clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
         clear_temp_cache(f'{CONLL_CURATED_RETOKENIZED}/*.conll')
-        """
         _report_log(message=f"{OUTPUT_CORPUS} is created.", type_log="S")
 
         # 1) Fetch all curated XMI curated
         _report_log(message="Fetch XMI curated from INCEpTION in progress...", type_log="V")
-        #client_inception.extract_xmi_curated()
+        client_inception.extract_xmi_curated()
         _report_log(message=f"XMI curated files are saved in {XMI_CURATED_PATH}", type_log="S")
 
         # 2) Re-tokenized XMI Curated
         _report_log(message="XMI Re-tokenization in progress... (Please wait, this is a long process)", type_log="V")
-        #batch_retokenization(dir_in=XMI_CURATED_PATH, dir_out=XMI_CURATED_RETOKENIZED,
-        #                     f_schema=XMI_CURATED_PATH + '/TypeSystem.xml')
+        batch_retokenization(dir_in=XMI_CURATED_PATH, dir_out=XMI_CURATED_RETOKENIZED,
+                             f_schema=XMI_CURATED_PATH + '/TypeSystem.xml')
         _report_log(message="XMI curated files are re-tokenized, "
                             "you can check the log here : ./retokenized_log.log",
                     type_log="S")
 
         # 3) Convert XMIs to CONLL
         _report_log(message="Convert XMI to CONLL format in progress...", type_log="V")
-        """
         x2c.Xmi2Conll(
             xmi=XMI_CURATED_RETOKENIZED,
             typesystem_input=f'{XMI_CURATED_PATH}/TypeSystem.xml',
             output=CONLL_CURATED_RETOKENIZED,
             type_name_annotations=yml_env['conll_structure'][0]['feature_structure'],
             sep=yml_env['conll_structure'][1]['type_separator']
-        )"""
+        )
         _report_log(message="All XMI are converted in CONLL format",
                     type_log="S")
 
         # 4) Merge all conll in one all.conll (with batch recipe)
         _report_log(message="Merge CONLL files in progress...", type_log="V")
-        #subprocess.call(f'cat {CONLL_CURATED_RETOKENIZED}/*.conll > {OUTPUT_CORPUS}/all.conll', shell=True)
+        subprocess.call(f'cat {CONLL_CURATED_RETOKENIZED}/*.conll > {OUTPUT_CORPUS}/all.conll', shell=True)
         _report_log(message=f"CONLL are merge in one, check: {OUTPUT_CORPUS}/all.conll",
                     type_log="S")
 
@@ -140,16 +137,16 @@ def main(yaml_env_file: str) -> None:
 
         # create an archive .zip for output
         _report_log(message=f"Create archive of {OUTPUT_CORPUS}...", type_log="I")
-        #subprocess.call(f'zip -r {OUTPUT_CORPUS}/output_annotated_corpus {OUTPUT_CORPUS}/* -x {OUTPUT_CORPUS}/meta_corpus.json', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        subprocess.call(f'zip -r {OUTPUT_CORPUS}/output_annotated_corpus {OUTPUT_CORPUS}/* -x {OUTPUT_CORPUS}/meta_corpus.json', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
         # remove old files from output_annotated_corpus/
-        #subprocess.call(
-        #    f"find {OUTPUT_CORPUS}/* -not \( -name '*zip' -or -name '*json' \) -delete",
-        #    shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        subprocess.call(
+            f"find {OUTPUT_CORPUS}/* -not \( -name '*zip' -or -name '*json' \) -delete",
+            shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
         # clear temp files
         _report_log(message="Clear temporary files in progress...", type_log="I")
-        #clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
-        #clear_temp_cache(f'{CONLL_CURATED_RETOKENIZED}/*.conll')
+        clear_temp_cache(f'{XMI_CURATED_RETOKENIZED}/*.xmi')
+        clear_temp_cache(f'{CONLL_CURATED_RETOKENIZED}/*.conll')
 
         _report_log(message=f"FINISHED: corpus is available here: {OUTPUT_CORPUS}/{OUTPUT_CORPUS}.zip", type_log="I")
 
